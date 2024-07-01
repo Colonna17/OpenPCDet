@@ -392,11 +392,25 @@ class DataBaseSampler(object):
             else:
                 file_path = self.root_path / info['path']
 
+                # print('CIAO! MI CHIAMO MICHELE E QUESTO PRINT È PER CAPIRE COSA NON VA')
+                # print('--------------------------------------------------------------------------')
+                # print('-) file path = ', file_path)
+                # print('-) NUM_POINT_FEATURES =', self.sampler_cfg.NUM_POINT_FEATURES )
+                # print('-) num_points_in_gt =', info['num_points_in_gt'])
+                # print('----------------------------------------------------------------------------')
+
                 obj_points = np.fromfile(str(file_path), dtype=np.float32).reshape(
                     [-1, self.sampler_cfg.NUM_POINT_FEATURES])
-                if obj_points.shape[0] != info['num_points_in_gt']:
-                    obj_points = np.fromfile(str(file_path), dtype=np.float64).reshape(-1, self.sampler_cfg.NUM_POINT_FEATURES)
 
+                if obj_points.shape[0] != info['num_points_in_gt']:
+                    # print('CIAO! MI CHIAMO GIORGIO E QUESTO PRINT È PER CAPIRE COSA NON VA')
+                    # print('--------------------------------------------------------------------------')
+                    # print(' dopo il reshpae andato bene:')
+                    # print('-) obj_points shape = ', obj_points.shape)
+                    # print('-) num_points_in_gt =', info['num_points_in_gt'])
+                    # print('----------------------------------------------------------------------------')                    
+                    obj_points = np.fromfile(str(file_path), dtype=np.float64).reshape(-1, self.sampler_cfg.NUM_POINT_FEATURES)
+            
             assert obj_points.shape[0] == info['num_points_in_gt']
             obj_points[:, :3] += info['box3d_lidar'][:3].astype(np.float32)
 

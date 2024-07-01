@@ -474,6 +474,8 @@ if __name__ == '__main__':
         import yaml
         from pathlib import Path
         from easydict import EasyDict
+        print('COSA STA SUCCEDENDO????')
+        print('sys.argv = ', sys.argv)
         dataset_cfg = EasyDict(yaml.safe_load(open(sys.argv[2])))
         ROOT_DIR = (Path(__file__).resolve().parent / '../../../').resolve()
         create_kitti_infos(
